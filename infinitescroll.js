@@ -12,27 +12,19 @@ steal(
         
     $.Controller('Infinitescroll', {},
     {
-        pixelBoundary: 500,
-        trigger: 'infinitescroll.request',
-        fetching: false,
-        _appendQueue: [],
+        fetching: false
 
         init: function() {
             var self = this;
 
             // Overwrite the default options as neccesary
-            this.pixelBoundary = this.options.pixelBoundary || this.pixelBoundary;
-            this.trigger = this.options.trigger || this.trigger;
-            this.search_params = this.options.search_params || {};
-            this.row = this.options.row || null;
-            this.smoothScroll = typeof this.options.smoothScroll === 'boolean' ? this.options.smoothScroll : this.smoothScroll;
-            this.empty = this.options.empty || null;
+            this.options.pixelBoundary = this.options.pixelBoundary || 500;
+            this.options.trigger = this.options.trigger || 'infinitescroll.request';
+            this.options.search_params = this.options.search_params || {};
+            this.options.empty = this.options.empty || null;
 
             // Pass of the rest of the options to instantiate on the normal tablesort component
             this.fetch();
-
-            // Setup the queuer
-            this._handleQueue();
         },
 
         /**
@@ -173,30 +165,4 @@ steal(
     });
 });
 
-
-        // $.Controller('Infinitescroll',
-        // {
-
-        // }, {
-        //     init: function() {
-        //         var self = this;
-        //         if (!this.options.limit || !this.options.model || !this.options.template) {
-        //             throw new Error('Must provide integer for `limit` AND JMVC Model for `model` AND EJS string for `template`.');
-        //         }
-        //     },
-
-        //     "click": function() {
-        //         this.render();
-        //     },
-
-        //     render: function() {
-        //         var self = this;
-        //         this.options.model.findAll({ offset: 3 }, function( users ) {
-        //             users.each(function(index, model) {
-        //                 self.element.find('table')
-        //                     .append(new $.EJS({ text: self.options.template }).render({ model: model }));
-        //             });
-        //         })
-        //     }
-        // });
     })
